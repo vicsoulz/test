@@ -1,0 +1,31 @@
+[db]
+host = "192.168.153.233"
+user = "root"
+passwd = "root"
+port = "3306"
+name = "harbor"
+
+[redis]
+db=0
+host="192.168.153.233"
+port="6379"
+passwd=""
+
+[jccoin]
+api_host = "http://wh.sim-c.luojilab.com"
+
+[retry]
+# 最大重试次数
+max_try = 5
+# 一次从数据库查多少数据重试
+row = 100
+
+[sentry]
+dns = "https://d7904e8dc992454ebfe3828e24ca1218:4b598bfa00264e93a8bd58f4b929603e@sentry.io/1189762"
+
+[rabbitmq]
+user = "admin"
+passwd = "rootroot"
+host = "192.168.153.233"
+port = "5672"
+vhost = "harbor"

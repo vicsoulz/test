@@ -1,0 +1,37 @@
+{
+  "Job":{
+    "Id": "jccoin",
+    "Name": "jccoin",
+    "Datacenters": ["dc1"],
+    "Type": "batch",
+    "Periodic":{
+      "Spec": "*/1 * * * * *",
+      "ProhibitOverlap": true
+    },
+    "TaskGroups": [{
+      "Name": "fetcher",
+      "Count": 2,
+      "Tasks":[{
+        "Name": "recharge_fetcher",
+        "Driver": "raw_exec",
+        "Constraint": {
+          "LTarget": "${meta.type}",
+          "RTarget": "fetcher"
+        },
+        "Config": {
+          "command": "/nomad/go/harbor jccoin recharge_fetcher --row=1000 --min_row=500 --end_id=1000"
+        }
+      },{
+        "Name": "cost_fetcher",
+        "Driver": "raw_exec",
+        "Constraint": {
+          "LTarget": "${meta.type}",
+          "RTarget": "checker"
+        },
+        "Config": {
+          "command": "/nomad/go/harbor jccoin cost_fetcher --row=1000 --min_row=500 --end_id=1000"
+        }
+      }]
+    }]
+  }
+}
